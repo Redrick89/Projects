@@ -15,7 +15,8 @@
 }
 
 .modal-container {
-  width: 300px;
+  width: 400px;
+  height: 350px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -31,6 +32,10 @@
 
 .modal-body {
   margin: 20px 0;
+}
+
+.modal-footer {
+  align-content: flex-end;
 }
 
 .modal-default-button {
@@ -49,3 +54,26 @@
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+.cell {
+  width: 100%;
+  table-layout: fixed;
+}
+.cell td {
+  width: 100%;
+}
+
+.list {
+  width: 90px;
+}
+#min-width {
+  width: 20px;
+  height: 20px;
+}
+
+#ticket-props {
+  color: gray;
+  font-size: 85%;
+  font-family: Arial;
+}
+
+

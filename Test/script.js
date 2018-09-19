@@ -1,10 +1,29 @@
 Vue.component('modal', {
-	props: ['programsData', 'cruisesData', 'selectedData', 'selected', 'select1', 'select2', 'select3'], 
+	props: ['programsData', 'cruisesData', 'programPrices', 'selected'], 
+	data:function(){
+		return {
+			ticketCategory: null,
+			ticketType: null,
+			ticketDiscount: null,
+			ticketCount: 1
+		}
+	},
+
 	template: '#modal-template',
+	
 	computed: {
-		selectedData1: function(){
-			if (this.select1 !== null) return( this.selectedData[this.select1] )
-			else return( this.selectedData )
+		selectedCategory: function(){
+			if (this.ticketCategory !== null) return( this.programPrices[this.ticketCategory] )
+			else return( this.programPrices )
+		},
+
+		ticketPrice: function(){
+			if (this.ticketDiscount !== null) return( this.selectedCategory[this.ticketType][this.ticketDiscount] )
+			else return( 0 )
+		},
+
+		ticketSumm: function(){
+			return( this.ticketPrice * this.ticketCount )
 		}
 	}
 });
@@ -66,24 +85,21 @@ var app = new Vue({
 					}
 				}
 			}],
-		selectedData: null,
+		programPrices: null,
 		selected: null,
-		select1: null,
-		select2: null,
-		select3: null,
-    	showModal: false
+		showModal: false
 	},
 
 	methods:{
 		initModal(){
-			this.selectedData = this.programsData[this.selected].prices;
+			this.programPrices = this.programsData[this.selected].prices;
 			this.showModal = true
 		},
 		exitModal(){
 			this.showModal = false;
-			this.select1 = null;
-			this.select2 = null;
-			this.select3 = null
+			this.ticketCategory = null;
+			this.ticketType = null;
+			this.ticketDiscount = null
 		}
 	}
 });
