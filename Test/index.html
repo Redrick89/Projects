@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8"/>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<script type="text/x-template" id="modal-template">
+		<div class="modal-mask">
+	      <div class="modal-wrapper">
+	        <div class="modal-container">
+
+	        	<div class="modal-header">
+	            	<h1>{{ programsData[selected].name }}</h1>
+	        	</div>
+
+	        	<div class="modal-body">
+	            	<select v-model="select1">
+						<option v-for = "(value, key) in selectedData" :value = "key"> {{ key }} </option>
+					</select>
+					
+					<select v-model="select2" :disabled="select1==null">
+						<option v-for = "(value, key) in selectedData[select1]" :value = "key"> {{ key }} </option>
+					</select>
+
+					<select v-model="select3" :disabled="select2==null">
+						<option v-for = "(value, key) in selectedData1[select2]" :value = "key"> {{ key }} </option>
+					</select>
+					<input type='number'></number>
+	        	</div>
+
+	        	<div class="modal-footer">
+	            	<button class="modal-default-button" @click="$emit('close')"> Купить </button>
+	        	</div>
+	        </div>
+	      </div>
+	    </div>
+	</script>
+	<h1>Выбор рейса</h1>
+	<div id='app'>
+		<select v-model="selected">
+			<option v-for = "(name,index) in programsData" :value = "index">{{ programsData[index].name }}</option>
+		</select>
+		<button id="show-modal" @click="initModal()" :disabled="selected==null">Купить билет</button>
+		<br>
+		<p v-if="selected !== null">
+			 Дата: {{ cruisesData[selected].date }} <br>
+			 Время: {{ cruisesData[selected].time }} <br>
+			 Мест: {{ cruisesData[selected].total_seats }} Свободно: {{ cruisesData[selected].available_seats }}
+		</p>
+
+  		<modal
+  			v-if="showModal"
+  			@close="exitModal()"
+  			v-bind:programs-data="programsData"
+  			v-bind:cruises-data="cruisesData"
+  			v-bind:selected-data="selectedData"
+  			v-bind:selected="selected"
+  			v-bind:select1="select1"
+  			v-bind:select2="select2"
+  			v-bind:select3="select3"
+		></modal>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

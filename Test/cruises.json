@@ -1,0 +1,2 @@
+[{"id":1, "date": "20-09-2018", "time": "14:40", "program_id": 1, "total_seats": 100, "available_seats": 30},
+{"id":2, "date": "21-09-2018", "time": "15:50", "program_id": 2, "total_seats": 100, "available_seats": 45}]

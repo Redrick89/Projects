@@ -1,0 +1,34 @@
+ [{"id": 1,
+  "name": "Северная венеция",
+  "prices": { 
+ 		"Deck": { 
+ 			"Adult": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Kid": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Benefit": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Special": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100}
+ 		},
+ 		"Bow": {
+ 			"Adult": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Kid": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Benefit": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Special": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100}
+ 		}
+ 	}
+},
+ {"id": 2,
+  "name": "Восточная венеция",
+  "prices": { 
+ 		"Deck": { 
+ 			"Adult": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Kid": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Benefit": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Special": {"Kid": 0, "Half": 50, "Full": 50, "Corp": 100}
+ 		},
+ 		"Bow": {
+ 			"Adult": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Kid": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Benefit": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100},
+ 			"Special": {"Free": 0, "Half": 50, "Full": 50, "Corp": 100}
+ 		}
+ 	}
+}]
