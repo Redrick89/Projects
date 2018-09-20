@@ -1,15 +1,15 @@
 Vue.component('modal', {
-	props: ['programsData', 'cruisesData', 'programPrices', 'selected'], 
+	props: ['programsData', 'cruisesData', 'jsonOutput', 'programPrices', 'selected'], 
 	data:function(){
 		return {
 			ticketCategory: null,
 			ticketType: null,
 			ticketDiscount: null,
-			ticketCount: 1
+			ticketCount: 1,
+			basket:[]
 		}
 	},
 
-	template: '#modal-template',
 	
 	computed: {
 		selectedCategory: function(){
@@ -25,7 +25,47 @@ Vue.component('modal', {
 		ticketSumm: function(){
 			return( this.ticketPrice * this.ticketCount )
 		}
-	}
+	},
+
+	methods: {
+		addToBasket: function(){
+			var chkCount =0;
+			for(var i in this.basket){
+				chkCount += this.basket[i].count;
+			}
+			if(chkCount + this.ticketCount <= this.cruisesData[this.selected].available_seats){
+				const basketItem = {
+					programId: this.programsData[this.selected].id,
+					category: this.ticketCategory,
+					type: this.ticketType,
+					discount: this.ticketDiscount,
+					price: this.ticketPrice,
+					count: this.ticketCount,
+					summ: this.ticketSumm
+				}
+				this.basket.push(basketItem);
+			}
+			else{
+				var availableSeats = this.cruisesData[this.selected].available_seats - chkCount;
+				alert('Осталось мест: ' + availableSeats);
+			}
+		},
+
+		applyBasket: function(){
+			var totalSumm = 0;
+			for(var i in this.basket){
+				totalSumm += this.basket[i].summ;
+			}
+			var ok = confirm('В корзине билеты на сумму: ' + totalSumm + 'руб. Оплатить?');
+
+			if(ok){
+				this.jsonOutput = JSON.stringify(this.basket);
+				alert(this.jsonOutput);
+			}
+		}
+	},
+
+	template: '#modal-template'
 });
 
 var app = new Vue({
@@ -85,6 +125,7 @@ var app = new Vue({
 					}
 				}
 			}],
+		jsonOutput: null,
 		programPrices: null,
 		selected: null,
 		showModal: false
@@ -99,7 +140,8 @@ var app = new Vue({
 			this.showModal = false;
 			this.ticketCategory = null;
 			this.ticketType = null;
-			this.ticketDiscount = null
+			this.ticketDiscount = null;
+			this.basket = []
 		}
 	}
 });

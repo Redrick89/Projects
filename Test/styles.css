@@ -15,10 +15,10 @@
 }
 
 .modal-container {
-  width: 400px;
+  width: 450px;
   height: 350px;
   margin: 0px auto;
-  padding: 20px 30px;
+  padding: 20px 20px;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
@@ -38,7 +38,7 @@
   align-content: flex-end;
 }
 
-.modal-default-button {
+.button {
   float: right;
 }
 .modal-enter {
@@ -63,11 +63,12 @@
 }
 
 .list {
-  width: 90px;
+  width: 100%;
 }
 #min-width {
   width: 20px;
   height: 20px;
+  text-align: center;
 }
 
 #ticket-props {

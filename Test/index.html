@@ -17,7 +17,7 @@
 	        	<div class="modal-body">
 	        		<table class="cell">
 	        		<tr>
-	        			<td>Категория</td>  <td>Тип</td>  <td>Скидка</td>  <td>Кол-во</td>
+	        			<td>Категория</td>  <td>Тип</td>  <td>Скидка</td>  <td>Кол-во</td>  <td></td>
 	        		</tr>
 	        		<tr>
 		            	<td><select class="list" v-model="ticketCategory">
@@ -32,25 +32,34 @@
 							<option v-for = "(value, key) in selectedCategory[ticketType]" :value = "key"> {{ key }} </option>
 						</select></td>
 
-						<td><button id="min-width" @click="ticketCount-=1" :disabled="ticketCount===0"> <b>-</b> </button>
+						<td><button id="min-width" @click="ticketCount-=1" :disabled="ticketCount===0"> - </button>
 						<input type='text' id="min-width" disabled='true' :value="ticketCount"> </input>
-						<button id="min-width" @click="ticketCount+=1"> <b>+</b> </button></td>
+						<button id="min-width" @click="ticketCount+=1"> + </button></td>
+
+						<td><button :disabled="ticketCount==0 || ticketDiscount==null" @click="addToBasket">Добавить</button></td>
 					</tr>
 					</table>
 					<br><hr>
 
-					<p id="ticket-props">
-						{{ programsData[selected].name }}  Категория: {{ticketCategory}} <br>
-						Тип: {{ticketType}}   
-						Скидка: {{ticketDiscount}}   
-						Цена: {{ticketPrice}}   
-						Кол-во: {{ticketCount}}  
-						Стоимость: {{ticketSumm}}
-					</p>
+					<div id="ticket-props" v-if="basket.length!==0">
+						<table>
+						<caption>В корзине билеты на рейс {{programsData[selected].name }}</caption> <br>
+						<tr v-for="(count, index) in basket">
+							<td width="90%">
+								Категория: {{basket[index].category}} Тип: {{basket[index].type}} Скидка: {{basket[index].discount}} 
+								Цена: {{basket[index].price}} Кол-во: {{basket[index].count}} Стоимость: {{basket[index].summ}}
+							</td>
+							<td width="10%">
+								<button id="min-width" @click="basket.splice(index, 1)">[x]</button>
+							</td>
+						</tr>
+					</table>
+					</div>
 	        	</div>
 
 	        	<div class="modal-footer">
-	            	<button class="modal-default-button" @click="$emit('close')"> Отмена </button>
+	            	<button class="button" @click="$emit('close')"> Отмена </button>
+	            	<button class="button" @click="applyBasket" :disabled="basket.length===0"> Оплатить </button>
 	        	</div>
 	        </div>
 	      </div>
@@ -74,6 +83,7 @@
   			@close="exitModal()"
   			v-bind:programs-data="programsData"
   			v-bind:cruises-data="cruisesData"
+  			v-bind:json-output="jsonOutput"
   			v-bind:program-prices="programPrices"
   			v-bind:selected="selected"
 		></modal>
